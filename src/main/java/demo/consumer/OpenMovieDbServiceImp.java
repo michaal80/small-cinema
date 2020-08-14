@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class OMDbServiceImp implements OMDbService {
+public class OpenMovieDbServiceImp implements OpenMovieDbService {
 
 	private RestTemplate restTemplate;
 	private ApiKey apiKey;

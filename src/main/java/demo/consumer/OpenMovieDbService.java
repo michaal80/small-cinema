@@ -1,6 +1,6 @@
 package demo.consumer;
 
-public interface OMDbService {
+public interface OpenMovieDbService {
 
 	MovieData request(String id);
 
