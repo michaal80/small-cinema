@@ -18,7 +18,7 @@ public class OpenMovieDbServiceImp implements OpenMovieDbService {
 	@Override
 	public MovieData request(String id) {
 		String url = buildUrl(id);
-		log.info(url);
+		log.info("request to: " + url);
 		return restTemplate.getForObject(url, MovieData.class);
 	}
 
