@@ -1,8 +1,12 @@
 package demo.config;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -13,6 +17,8 @@ import org.springframework.web.client.RestTemplate;
 
 import demo.Movie;
 import demo.MovieRepository;
+import demo.show.Show;
+import demo.show.ShowRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration
@@ -26,17 +32,26 @@ public class Config {
 	}
 
 	@Bean
-	public CommandLineRunner loadMoviesFromFile(MovieRepository repository) {
+	public CommandLineRunner loadMoviesFromFile(MovieRepository movieRepository, ShowRepository showRepository) {
 		return (args) -> {
+			List<Movie> movies = new ArrayList<>();
 			List<String> result = Files.readAllLines(Paths.get("src/main/resources/movies"));
-			result.forEach(id -> repository.save(new Movie(id)));
+			result.forEach(id -> {
+				movies.add(new Movie(id));
+			});
+			movieRepository.saveAll(movies);
 
-			log.info("Movie ids found with findAll():");
-			log.info("-------------------------------");
-			for (Movie movie : repository.findAll()) {
-				log.info(movie.toString());
-			}
-			log.info("");
+			showRepository.save(new Show(movies.get(0), LocalDateTime.of(2020, Month.DECEMBER, 1, 20, 0, 0, 0),
+					new BigDecimal(10)));
+			showRepository.save(new Show(movies.get(1), LocalDateTime.of(2020, Month.DECEMBER, 2, 20, 0, 0, 0),
+					new BigDecimal(15)));
+			showRepository.save(new Show(movies.get(2), LocalDateTime.of(2020, Month.DECEMBER, 3, 20, 0, 0, 0),
+					new BigDecimal(20)));
+			log.info("movie list: ");
+			movieRepository.findAll().forEach(m -> log.info(m.getIMDbId()));
+
+			log.info("show list: ");
+			showRepository.findAll().forEach(m -> log.info(m.getMovie().getIMDbId()));
 
 		};
 	}
