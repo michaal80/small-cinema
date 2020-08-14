@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import demo.movie.Movie;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +26,7 @@ public class Show {
 	private Long id;
 	@OneToOne
 	private Movie movie;
+	@JsonSerialize(using = ToStringSerializer.class)
 	private LocalDateTime localDateTime;
 	private BigDecimal price;
 

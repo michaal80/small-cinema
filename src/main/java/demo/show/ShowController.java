@@ -23,31 +23,32 @@ public class ShowController {
 	private ShowRepository showRepository;
 
 	@GetMapping("/shows")
-	List<Show> findAll() {
+	public List<Show> findAll() {
 		return (List<Show>) showRepository.findAll();
 	}
 
 	@PostMapping("/shows")
 	@ResponseStatus(HttpStatus.CREATED)
-	Show add(@RequestBody Show newShow) {
+	public Show add(@RequestBody Show newShow) {
 		log.info("adding " + newShow.getMovie().getIMDbId());
 		return showRepository.save(newShow);
 	}
 
 	@GetMapping("/shows/{id}")
-	Optional<Show> findOne(@PathVariable Long id) {
+	public Optional<Show> findOne(@PathVariable Long id) {
 		return showRepository.findById(id);
 	}
 
 	@PutMapping("/shows/{id}")
-	Optional<Show> update(@RequestBody Show newShow, @PathVariable Long id) {
+	public Show update(@RequestBody Show newShow, @PathVariable Long id) {
+		System.out.println("update " + newShow.getLocalDateTime());
+		System.out.println("id  " + id);
+		Show show = showRepository.findById(id).get();
+		show.setLocalDateTime(newShow.getLocalDateTime());
+		show.setMovie(newShow.getMovie());
+		show.setPrice(newShow.getPrice());
+		return showRepository.save(show);
 
-		return showRepository.findById(id).map(show -> {
-			show.setLocalDateTime(newShow.getLocalDateTime());
-			show.setMovie(newShow.getMovie());
-			show.setPrice(newShow.getPrice());
-			return showRepository.save(show);
-		});
 	}
 
 }

@@ -13,7 +13,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import demo.movie.Movie;
 import demo.movie.MovieRepository;
@@ -48,10 +52,10 @@ public class Config {
 			showRepository.save(new Show(movies.get(2), LocalDateTime.of(2020, Month.DECEMBER, 3, 20, 0, 0, 0),
 					new BigDecimal(20)));
 			log.info("movie list: ");
-			movieRepository.findAll().forEach(m -> log.info(m.getIMDbId()));
+			movieRepository.findAll().forEach(m -> log.info(m.getId() + " " + m.getIMDbId()));
 
 			log.info("show list: ");
-			showRepository.findAll().forEach(m -> log.info(m.getMovie().getIMDbId()));
+			showRepository.findAll().forEach(m -> log.info(m.getId() + " " + m.getMovie().getIMDbId()));
 
 		};
 	}
@@ -61,4 +65,10 @@ public class Config {
 		return builder.build();
 	}
 
+	@Bean
+	@Primary
+	public Jackson2ObjectMapperBuilder objectMapperBuilder() {
+		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
+		return builder.modulesToInstall(new JavaTimeModule());
+	}
 }

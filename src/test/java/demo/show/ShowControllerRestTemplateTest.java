@@ -9,9 +9,7 @@ import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
-import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -59,7 +57,7 @@ public class ShowControllerRestTemplateTest {
 
 	}
 
-//	@Test
+	@Test
 	public void updateShow() throws Exception {
 		Show updateShow = createShow(1L);
 		updateShow.setLocalDateTime(LocalDateTime.of(2020, Month.DECEMBER, 1, 22, 0, 0, 0));
@@ -68,33 +66,22 @@ public class ShowControllerRestTemplateTest {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> entity = new HttpEntity<>(om.writeValueAsString(updateShow), headers);
 
-		ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").exchange("/shows/1",
+		ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").exchange("/shows/9",
 				HttpMethod.PUT, entity, String.class);
 
 		assertEquals(HttpStatus.OK, response.getStatusCode());
-		JSONAssert.assertEquals(om.writeValueAsString(updateShow), response.getBody(), false);
 
-		List<Show> list = showController.findAll();
-		Show show = list.get(0);
-		System.out.println(show);
-
+		Show show = showController.findOne(9L).get();
+		assertEquals(22, show.getLocalDateTime().getHour());
 	}
 
 	@Test
 	public void findAll() throws Exception {
 
-		ResponseEntity<Show[]> response = restTemplate.getForEntity("/shows", Show[].class);
+		ResponseEntity<String> response = restTemplate.getForEntity("/shows", String.class);
 
-		List<Object> list = Arrays.asList(response);
-
-		for (Object s : list) {
-			System.out.println(s.toString());
-		}
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 
-//		JSONAssert.assertEquals(expected, response.getBody(), false);
-
-//		verify(mockRepository, times(1)).findAll();
 	}
 
 }

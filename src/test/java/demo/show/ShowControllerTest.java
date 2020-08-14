@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import demo.movie.Movie;
 import demo.movie.MovieRepository;
@@ -53,11 +52,7 @@ public class ShowControllerTest {
 	public void testAddShow() throws JsonProcessingException {
 		Show show = createShow(1L);
 		showController.add(show);
-		ObjectMapper objectMapper = new ObjectMapper();
-		System.out.println(objectMapper.writeValueAsString(show));
 		List<Show> result = showController.findAll();
-		System.out.println(result.size());
-
 		assertEquals(show.getMovie().getIMDbId(), result.get(0).getMovie().getIMDbId());
 
 	}
