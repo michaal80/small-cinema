@@ -1,4 +1,4 @@
-package demo.consumer;
+package demo.details;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -16,10 +16,10 @@ public class OpenMovieDbServiceImp implements OpenMovieDbService {
 	private ApiKey apiKey;
 
 	@Override
-	public MovieData request(String id) {
+	public OpenMovieDetails request(String id) {
 		String url = buildUrl(id);
 		log.info("request to: " + url);
-		return restTemplate.getForObject(url, MovieData.class);
+		return restTemplate.getForObject(url, OpenMovieDetails.class);
 	}
 
 	private String buildUrl(String id) {

@@ -1,5 +1,5 @@
 
-package demo.consumer;
+package demo.details;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({ "Title", "Year", "Rated", "Released", "Runtime", "Genre", "Director", "Writer", "Actors", "Plot",
 		"Language", "Country", "Awards", "Poster", "Ratings", "Metascore", "imdbRating", "imdbVotes", "imdbID", "Type",
 		"DVD", "BoxOffice", "Production", "Website", "Response" })
-public class MovieData {
+public class OpenMovieDetails {
 
 	@JsonProperty("Title")
 	private String title;
@@ -47,7 +47,7 @@ public class MovieData {
 	@JsonProperty("Poster")
 	private String poster;
 	@JsonProperty("Ratings")
-	private List<Rating> ratings = null;
+	private List<OpenMovieRating> ratings = null;
 	@JsonProperty("Metascore")
 	private String metascore;
 	@JsonProperty("imdbRating")
@@ -212,12 +212,12 @@ public class MovieData {
 	}
 
 	@JsonProperty("Ratings")
-	public List<Rating> getRatings() {
+	public List<OpenMovieRating> getRatings() {
 		return ratings;
 	}
 
 	@JsonProperty("Ratings")
-	public void setRatings(List<Rating> ratings) {
+	public void setRatings(List<OpenMovieRating> ratings) {
 		this.ratings = ratings;
 	}
 

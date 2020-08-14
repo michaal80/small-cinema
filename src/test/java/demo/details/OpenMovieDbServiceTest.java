@@ -1,4 +1,4 @@
-package demo.openmoviedb;
+package demo.details;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,8 +12,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import demo.SmallCinemaApp;
-import demo.consumer.MovieData;
-import demo.consumer.OpenMovieDbService;
+import demo.details.OpenMovieDbService;
+import demo.details.OpenMovieDetails;
 
 @SpringBootTest(classes = SmallCinemaApp.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class OpenMovieDbServiceTest {
@@ -25,7 +25,7 @@ public class OpenMovieDbServiceTest {
 
 	@Test
 	public void testOMDb() throws JsonMappingException, JsonProcessingException {
-		MovieData movieData = openMovieDbService.request("tt0232500");
+		OpenMovieDetails movieData = openMovieDbService.request("tt0232500");
 		assertEquals(movieData.getTitle(), "The Fast and the Furious");
 
 	}

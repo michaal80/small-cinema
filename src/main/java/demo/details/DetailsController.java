@@ -5,9 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import demo.consumer.MovieData;
-import demo.consumer.OpenMovieDbService;
-
 /**
  * 
  * @author mike
@@ -23,7 +20,7 @@ public class DetailsController {
 	private OpenMovieDbService openMovieDbService;
 
 	@GetMapping("/details/{id}")
-	public MovieData findOne(@PathVariable String id) {
+	public OpenMovieDetails findOne(@PathVariable String id) {
 		return openMovieDbService.request(id);
 	}
 

@@ -1,5 +1,5 @@
 
-package demo.consumer;
+package demo.details;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "Source", "Value" })
-public class Rating {
+public class OpenMovieRating {
 
 	@JsonProperty("Source")
 	private String source;
