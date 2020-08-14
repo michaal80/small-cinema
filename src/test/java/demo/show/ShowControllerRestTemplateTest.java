@@ -46,7 +46,7 @@ public class ShowControllerRestTemplateTest {
 	}
 
 	@Test
-	public void addShow() throws Exception {
+	public void testAddShow() throws Exception {
 		Show show = createShow(4L);
 		ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").postForEntity("/shows", show,
 				String.class);
@@ -58,7 +58,7 @@ public class ShowControllerRestTemplateTest {
 	}
 
 	@Test
-	public void updateShow() throws Exception {
+	public void testUpdateShow() throws Exception {
 		Show updateShow = createShow(1L);
 		updateShow.setLocalDateTime(LocalDateTime.of(2020, Month.DECEMBER, 1, 22, 0, 0, 0));
 
@@ -76,7 +76,7 @@ public class ShowControllerRestTemplateTest {
 	}
 
 	@Test
-	public void findAll() throws Exception {
+	public void testFindAll() throws Exception {
 
 		ResponseEntity<String> response = restTemplate.getForEntity("/shows", String.class);
 

@@ -17,7 +17,7 @@ public class DetailsControllerRestTemplateTest {
 	private TestRestTemplate restTemplate;
 
 	@Test
-	public void findDetailsOfMovie() throws Exception {
+	public void testFindDetailsOfMovie() throws Exception {
 
 		ResponseEntity<String> response = restTemplate.getForEntity("/details/tt0232500", String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
