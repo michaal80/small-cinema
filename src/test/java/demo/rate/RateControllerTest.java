@@ -26,8 +26,8 @@ public class RateControllerTest {
 	public void testRate() {
 
 		Movie movie = movieRepository.findById(1L);
-
-		rateController.add(5, movie.getId());
+		Rate rate = new Rate(movie, 5);
+		rateController.add(rate);
 		List<Rate> rates = rateController.findAll();
 
 		assertEquals(5, rates.get(0).getRate());

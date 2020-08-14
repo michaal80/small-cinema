@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,14 +28,13 @@ public class RateController {
 	@Autowired
 	private MovieRepository movieRepository;
 
-	@PostMapping("/rates/{id}")
+	@PostMapping("/rates")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Integer add(@RequestBody Integer review, @PathVariable Long id) {
+	public void add(@RequestBody Rate rate) {
 
-		Movie movie = movieRepository.findById(id).get();
-		Rate rate = new Rate(movie, review);
+		Movie movie = movieRepository.findById(rate.getMovie().getId()).get();
+//		Rate rate = new Rate(movie, review);
 		rateRepository.save(rate);
-		return review;
 	}
 
 	@GetMapping("/rates")
