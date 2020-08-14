@@ -14,6 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import demo.movie.Movie;
 import demo.movie.MovieRepository;
 
+/**
+ * 
+ * @author mike
+ *
+ *         An endpoint in which their customers (i.e. moviegoers) can leave a
+ *         review rating (from 1-5 stars) about a particular movie
+ */
 @RestController
 public class RateController {
 

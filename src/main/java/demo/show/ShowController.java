@@ -15,6 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * @author mike
+ *
+ *         An internal endpoint in which they (i.e. the cinema owners) can
+ *         update show times and prices for their movie catalog.
+ * 
+ *         An endpoint in which their customers (i.e. moviegoers) can fetch
+ *         movie times.
+ * 
+ */
 @RestController
 @Slf4j
 public class ShowController {
@@ -41,8 +52,6 @@ public class ShowController {
 
 	@PutMapping("/shows/{id}")
 	public Show update(@RequestBody Show newShow, @PathVariable Long id) {
-		System.out.println("update " + newShow.getLocalDateTime());
-		System.out.println("id  " + id);
 		Show show = showRepository.findById(id).get();
 		show.setLocalDateTime(newShow.getLocalDateTime());
 		show.setMovie(newShow.getMovie());

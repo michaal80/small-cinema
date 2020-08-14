@@ -8,6 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import demo.consumer.MovieData;
 import demo.consumer.OpenMovieDbService;
 
+/**
+ * 
+ * @author mike
+ * 
+ *         An endpoint in which their customers (i.e. moviegoers) can fetch
+ *         details about one of their movies.
+ *
+ */
 @RestController
 public class DetailsController {
 
