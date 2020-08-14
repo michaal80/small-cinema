@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import demo.Movie;
+import demo.movie.Movie;
 import lombok.Getter;
 import lombok.Setter;
 

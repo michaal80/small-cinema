@@ -9,6 +9,7 @@ import java.time.Month;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ import org.springframework.http.ResponseEntity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import demo.Movie;
-import demo.MovieRepository;
+import demo.movie.Movie;
+import demo.movie.MovieRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // for restTemplate
 public class ShowControllerRestTemplateTest {
@@ -58,7 +59,7 @@ public class ShowControllerRestTemplateTest {
 
 	}
 
-	@Test
+//	@Test
 	public void updateShow() throws Exception {
 		Show updateShow = createShow(1L);
 		updateShow.setLocalDateTime(LocalDateTime.of(2020, Month.DECEMBER, 1, 22, 0, 0, 0));
@@ -77,6 +78,23 @@ public class ShowControllerRestTemplateTest {
 		Show show = list.get(0);
 		System.out.println(show);
 
+	}
+
+	@Test
+	public void findAll() throws Exception {
+
+		ResponseEntity<Show[]> response = restTemplate.getForEntity("/shows", Show[].class);
+
+		List<Object> list = Arrays.asList(response);
+
+		for (Object s : list) {
+			System.out.println(s.toString());
+		}
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+
+//		JSONAssert.assertEquals(expected, response.getBody(), false);
+
+//		verify(mockRepository, times(1)).findAll();
 	}
 
 }

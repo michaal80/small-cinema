@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import demo.Movie;
-import demo.MovieRepository;
+import demo.movie.Movie;
+import demo.movie.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest

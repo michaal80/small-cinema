@@ -1,4 +1,4 @@
-package demo;
+package demo.movie;
 
 import org.springframework.data.repository.CrudRepository;
 

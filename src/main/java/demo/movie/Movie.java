@@ -1,4 +1,4 @@
-package demo;
+package demo.movie;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -16,8 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import demo.Movie;
-import demo.MovieRepository;
+import demo.movie.Movie;
+import demo.movie.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest

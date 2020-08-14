@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import demo.Movie;
-import demo.MovieRepository;
+import demo.movie.Movie;
+import demo.movie.MovieRepository;
 import demo.show.Show;
 import demo.show.ShowRepository;
 import lombok.extern.slf4j.Slf4j;
