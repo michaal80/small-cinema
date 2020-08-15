@@ -1,5 +1,6 @@
 package demo.details;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,8 +22,14 @@ public class DetailsController {
 	private OpenMovieDbService openMovieDbService;
 
 	@GetMapping("/details/{id}")
-	public OpenMovieDetails findOne(@PathVariable String id) {
-		return openMovieDbService.request(id);
+	public ResponseEntity<OpenMovieDetails> findOne(@PathVariable String id) {
+		OpenMovieDetails openMovieDetails = openMovieDbService.request(id);
+		if ("True".equals(openMovieDetails.getResponse())) {
+			return ResponseEntity.ok(openMovieDetails);
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+
 	}
 
 }

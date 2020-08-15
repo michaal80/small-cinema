@@ -12,8 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import demo.SmallCinemaApp;
-import demo.details.OpenMovieDbService;
-import demo.details.OpenMovieDetails;
 
 @SpringBootTest(classes = SmallCinemaApp.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class OpenMovieDbServiceTest {
@@ -25,8 +23,15 @@ public class OpenMovieDbServiceTest {
 
 	@Test
 	public void testOMDb() throws JsonMappingException, JsonProcessingException {
-		OpenMovieDetails movieData = openMovieDbService.request("tt0232500");
-		assertEquals(movieData.getTitle(), "The Fast and the Furious");
+		OpenMovieDetails openMovieDetails = openMovieDbService.request("tt0232500");
+		assertEquals("The Fast and the Furious", openMovieDetails.getTitle());
+
+	}
+
+	@Test
+	public void testOMDb_NotFound() throws JsonMappingException, JsonProcessingException {
+		OpenMovieDetails openMovieDetails = openMovieDbService.request("aaaaa");
+		assertEquals("False", openMovieDetails.getResponse());
 
 	}
 

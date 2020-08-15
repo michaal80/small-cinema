@@ -76,6 +76,24 @@ public class ShowControllerRestTemplateTest {
 	}
 
 	@Test
+	public void testUpdateNonExistingShow() throws Exception {
+		Show updateShow = createShow(50L);
+		updateShow.setLocalDateTime(LocalDateTime.of(2020, Month.DECEMBER, 1, 22, 0, 0, 0));
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<String> entity = new HttpEntity<>(om.writeValueAsString(updateShow), headers);
+
+		ResponseEntity<String> response = restTemplate.withBasicAuth("admin", "admin").exchange("/shows/9",
+				HttpMethod.PUT, entity, String.class);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+
+		Show show = showController.findOne(9L).get();
+		assertEquals(22, show.getLocalDateTime().getHour());
+	}
+
+	@Test
 	public void testFindAll() throws Exception {
 
 		ResponseEntity<String> response = restTemplate.getForEntity("/shows", String.class);

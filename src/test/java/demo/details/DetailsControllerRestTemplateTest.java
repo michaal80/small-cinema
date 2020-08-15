@@ -25,4 +25,11 @@ public class DetailsControllerRestTemplateTest {
 
 	}
 
+	@Test
+	public void testFindDetailsOfMovie_404() throws Exception {
+		ResponseEntity<String> response = restTemplate.getForEntity("/details/aaaaaaaa", String.class);
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
+	}
+
 }
