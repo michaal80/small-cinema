@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,11 +20,17 @@ public class DetailsControllerTest {
 	@Test
 	public void testFindOne() {
 
-		ResponseEntity<OpenMovieDetails> details = detailsController.findOne("tt0232500");
-		System.out.println(details.getBody());
+		ResponseEntity<OpenMovieDetails> response = detailsController.findOne("tt0232500");
+		assertEquals("tt0232500", response.getBody().getImdbID());
+		log.info(response.getBody().getTitle());
 
-		assertEquals("tt0232500", details.getBody().getImdbID());
-		log.info(details.getBody().getTitle());
+	}
+
+	@Test
+	public void testFindNonExistingOne() {
+
+		ResponseEntity<OpenMovieDetails> response = detailsController.findOne("aaaa");
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 
 	}
 
