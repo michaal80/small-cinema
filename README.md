@@ -1,6 +1,6 @@
 # small-cinema
 
-Please create a file "apikey" with a key to The Open Movie Database and use maven commands to launch it e.g.:
+Please add key (The Open Movie Database) to a file "apikey"  in the main folder and use maven commands to launch it e.g.:
 
 mvn clean install
 mvn spring-boot:run
